@@ -24,7 +24,8 @@ module.exports = {
       colors: {
         primary: "#EFD8C6",
         secondary: "#283021",
-        blue: "#9EC0E7",
+        blue: "#7ea3d2",
+        bgPink: "rgb(185,147,130,75%)",
       },
     },
   },

@@ -14,9 +14,29 @@ body {
     @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md text-white bg-gray-900 text-xs font-bold transition-all duration-100 scale-0 origin-left;
   }
   .content {
-    @apply bg-primary h-screen flex justify-center items-center;
+    @apply bg-primary h-[100%] w-[100%] flex justify-start items-center;
   }
+
   .about-text {
     @apply bg-[rgb(185,147,130,75%)];
+  }
+
+  .dot {
+    @apply w-10 p-1;
+  }
+  .about-image {
+    @apply h-[65%] w-full object-cover object-center;
+  }
+  .bio-image {
+    @apply h-[100%] w-full object-cover object-center;
+  }
+  .about-section {
+    @apply h-[35%] flex flex-col content-center items-center  w-[100%] pt-4;
+  }
+  .dots {
+    @apply h-[10%] flex flex-row justify-center items-center;
+  }
+  .hundo {
+    @apply h-[100%] w-[100%];
   }
 }
