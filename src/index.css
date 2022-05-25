@@ -4,6 +4,7 @@
 
 body {
   background-color: #efd8c6;
+  background-image: url("./images/AboutPics/Mask\ Group\ 2.svg");
 }
 
 @layer components {
@@ -25,7 +26,7 @@ body {
     @apply w-10 p-1;
   }
   .about-image {
-    @apply h-[65%] w-full object-cover object-center;
+    @apply w-full object-cover object-center;
   }
   .bio-image {
     @apply h-[100%] w-full object-cover object-center;
@@ -38,5 +39,11 @@ body {
   }
   .hundo {
     @apply h-[100%] w-[100%];
+  }
+  .form-input {
+    @apply m-2 rounded-l;
+  }
+  .body-text-sizing {
+    @apply sm:text-xs md:text-lg lg:text-base;
   }
 }

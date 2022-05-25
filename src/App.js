@@ -3,33 +3,44 @@ import "./App.css";
 import { ReactComponent as Logo } from "./images/LOGO.svg";
 import { ReactComponent as LogoText } from "./images/Logo Text.svg";
 import horse from "./images/horse.jpg";
+import horseP from "./images/horsePortrait.jpg";
+import pic_individual from "./images/AboutPics/Individual.png";
+import pic_group from "./images/AboutPics/Group.png";
+import pic_workshops from "./images/AboutPics/Workshops.png";
+import pic_whatis from "./images/AboutPics/WhatIs.png";
+import pic_retreat from "./images/AboutPics/Retreat.png";
+import pic_collab from "./images/AboutPics/Collab.png";
+import pic_riders from "./images/AboutPics/Riders.png";
+
 import ash from "./images/For Jake 2.jpeg";
 import { ReactComponent as Dot } from "./images/dot.svg";
-
+import * as Yup from "yup";
+import { useState } from "react";
 import {
   Routes,
   Route,
   Link,
+  NavLink,
   useLocation,
   useParams,
   Outlet,
 } from "react-router-dom";
 import { animate, AnimatePresence, motion } from "framer-motion";
+import { useFormik } from "formik";
 
 export default function App() {
   const location = useLocation();
+
   return (
-    <div className="flex font-main font-semibold text-[2.5rem]">
+    <div className="flex font-main font-semibold ">
       <div className="flex-none w-0 sm:w-40">
         <Nav />
       </div>
       <div className=" h-screen w-screen">
         <AnimatePresence exitBeforeEnter>
           <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home2 />} />
             <Route path="about" element={<About />} />
-            <Route path="about2" element={<About2 />} />
-            <Route path="about3" element={<About3 />} />
             <Route path="meet" element={<MeetTheHerd />}>
               <Route path="" element={<HerdIndex />} />
               <Route path=":slug" element={<HerdMember />} />
@@ -46,10 +57,38 @@ function Nav() {
   return (
     <div className="bg-secondary text-primary text-2xl fixed top-0 left-0 h-screen w-0 sm:w-40 m-0 flex flex-col justify-center items-center invisible sm:visible">
       <ul className=" transform rotate-90 font-main font-semibold text-4xl flex flex-row items-center whitespace-nowrap w-0 sm:w-[100vh] place-content-evenly">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/meet">Meet The Herd</Link>
-        <Link to="/contact">Contact</Link>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? " text-blue border-b-4 border-current" : ""
+          }
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            isActive ? " text-blue border-b-4 border-current" : ""
+          }
+        >
+          About
+        </NavLink>
+        <NavLink
+          to="/meet"
+          className={({ isActive }) =>
+            isActive ? " text-blue border-b-4 border-current" : ""
+          }
+        >
+          Meet The Herd
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            isActive ? " text-blue border-b-4 border-current" : ""
+          }
+        >
+          Contact
+        </NavLink>
       </ul>
       <div className=" border-l-4 border-secondary h-full absolute right-[-.5rem]"></div>
       {/* <NavBarIcon text="Follow my instagram" icon={<FaInstagram size={28} />} /> */}
@@ -77,137 +116,84 @@ function Home() {
     </motion.div>
   );
 }
+function Home2() {
+  return (
+    <motion.div
+      className="content flex-col bg-[url('./images/horse.jpg')] bg-center bg-no-repeat brightness-75"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Logo className=" justify-center flex" />
+      <LogoText className=" absolute right-10 top-10" />
+    </motion.div>
+  );
+}
 
 function About() {
+  const whatHeader = "What is Equine Facilitated Learning?";
   return (
     <div className="content flex  flex-col p-10">
       <motion.div
-        className="h-[90%] w-[100%]"
+        className="h-[100%] w-[100%]"
         key={"about"}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        <img className="about-image" src={horse} alt="Horses in a pasture" />
-        <div className="about-section">
-          <div className="h-[10%] ">
-            <h2 className="about-text text-xl sm:text-4xl">Header</h2>
-          </div>
-          <div className="h-auto about-text text-center mt-5">
-            <h1 className="p-5 font-thin text-xl sm:text-4xl">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Temporibus velit enim, libero accusantium labore vel. Facilis,
-              commodi reprehenderit? Et natus modi ipsam itaque, ad debitis non
-              voluptate rerum tempora culpa quae laborum repellat, est
-              necessitatibus, soluta quos inventore ex cupiditate blanditiis
-              enim sint fugiat! Quae in natus voluptatibus porro. Iste maxime
-              asperiores, distinctio odit quia adipisci quis eaque veritatis!
-              Ipsam eius debitis in natus quos, sequi commodi ipsa nesciunt
-              dolores. Provident, quod eius ullam perspiciatis praesentium nam
-              assumenda tempore recusandae quae! Consectetur nihil magni ipsam
-              minima cum quidem laborum atque fugiat temporibus repellendus eum
-              debitis, ullam earum distinctio, praesentium voluptatum!
+        <div className="flex flex-row  pb-8">
+          <div className="w-[68%] backdrop-blur-sm bg-white/30 ">
+            <h1 className=" text-5xl">
+              <strong>
+                <em>{whatHeader}</em>
+              </strong>
             </h1>
+            <p className="body-text-sizing whitespace-pre-line">
+              Horses and humans have been in conversation for thousands of
+              years.
+              <br></br>
+              <br></br>
+              <strong>Equine Facilitated Learning</strong> is a space to
+              participate in this powerful conversation. Horses are sentient
+              beings that mirror back to us our thoughts and feelings, and to
+              share space with such a powerful animal can shift us in profound
+              ways.
+              <br></br>
+              <br></br>
+              Horses can help us gain clarity on what we are experiencing and
+              feeling in a <strong>non-judgemental</strong> way, and being
+              around{" "}
+              <strong>
+                horses can help us to trust and be honest with ourselves.
+              </strong>
+              <br></br>
+              <br></br>
+              When we take responsibility forourselves, we open doors to living
+              life in a way that honors our powerful potential.
+              <br></br>
+              <br></br>
+              <strong>Equus & Awareness</strong> facilitates a safe and
+              supportive environment to learn about ourselves and others."
+            </p>
           </div>
-          <div></div>
+          <img className="w-[32%] object-cover object-top " src={pic_whatis} />
+        </div>
+        <div className="flex flex-row flex-wrap  justify-between">
+          {Object.entries(aboutType).map(([slug, { header, img, body }]) => (
+            <div className="w-[50%] md:w-[32%] backdrop-blur-sm bg-white/30">
+              <h1 className="bg-blue text-center body-text-sizing text-md">
+                <strong>
+                  <em>{header}</em>
+                </strong>
+              </h1>
+              <img className="w-[100%] object-cover " src={img} alt={slug} />
+              <p className=" body-text-sizing whitespace-pre-wrap text-center ">
+                {body}
+              </p>
+            </div>
+          ))}
         </div>
       </motion.div>
-      <div className="dots">
-        <Link to="/about">
-          <Dot className="dot  fill-blue" />
-        </Link>
-        <Link to="/about2">
-          <Dot className="dot  fill-white" />
-        </Link>
-        <Link to="/about3">
-          <Dot className="dot fill-white" />
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-function About2() {
-  return (
-    <div className="content flex  flex-col p-10">
-      <motion.div
-        className="h-[90%] w-[100%]"
-        key={"about"}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        <img className="about-image" src={horse} alt="Horses in a pasture" />
-        <div className="about-section">
-          <div className="h-[10%] ">
-            <h2 className="about-text text-xl sm:text-4xl">Header</h2>
-          </div>
-          <div className="h-auto about-text text-center mt-5">
-            <h1 className="p-5 font-thin text-xl sm:text-4xl">about 2</h1>
-          </div>
-          <div></div>
-        </div>
-      </motion.div>
-      <div className="dots">
-        <Link to="/about">
-          <Dot className="dot  fill-white" />
-        </Link>
-        <Link to="/about2">
-          <Dot className="dot fill-blue" />
-        </Link>
-        <Link to="/about3">
-          <Dot className="dot fill-white" />
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-function About3() {
-  return (
-    <div className="content flex  flex-col p-10">
-      <motion.div
-        className="h-[90%] w-[100%]"
-        key={"about"}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        <img className="about-image" src={horse} alt="Horses in a pasture" />
-        <div className="about-section">
-          <div className="h-[10%] ">
-            <h2 className="about-text text-xl sm:text-4xl">Header</h2>
-          </div>
-          <div className="h-auto about-text text-center mt-5">
-            <h1 className="p-5 font-thin text-xl sm:text-4xl">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Temporibus velit enim, libero accusantium labore vel. Facilis,
-              commodi reprehenderit? Et natus modi ipsam itaque, ad debitis non
-              voluptate rerum tempora culpa quae laborum repellat, est
-              necessitatibus, soluta quos inventore ex cupiditate blanditiis
-              enim sint fugiat! Quae in natus voluptatibus porro. Iste maxime
-              asperiores, distinctio odit quia adipisci quis eaque veritatis!
-              Ipsam eius debitis in natus quos, sequi commodi ipsa nesciunt
-              dolores. Provident, quod eius ullam perspiciatis praesentium nam
-              assumenda tempore recusandae quae! Consectetur nihil magni ipsam
-              minima cum quidem laborum atque fugiat temporibus repellendus eum
-              debitis, ullam earum distinctio, praesentium voluptatum!
-            </h1>
-          </div>
-          <div></div>
-        </div>
-      </motion.div>
-      <div className="dots ">
-        <Link to="/about">
-          <Dot className="dot  fill-white dot" />
-        </Link>
-        <Link to="/about2">
-          <Dot className="dot fill-white dot" />
-        </Link>
-        <Link to="/about3">
-          <Dot className="dot fill-blue dot" />
-        </Link>
-      </div>
     </div>
   );
 }
@@ -269,14 +255,84 @@ function HerdMember() {
 }
 
 function Contact() {
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+    },
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .max(30, "Must be 30 characters or less")
+        .required("Please include your name :)"),
+      email: Yup.string()
+        .email("Must be a valid email address")
+        .required("Please include your email :)"),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
   return (
-    <div className="content flex-row p-5">
+    <div className="content flex-col md:flex-row p-5">
       <div className="flex-col h-[100%] w-[50%]">
-        <div className="h-[40%] w-[100%]"></div>
-        <div className="h-[60%] w-[100%]"> Upcoming</div>
+        <div className="flex h-[40%] w-[100%] items-center">
+          <form
+            className="flex flex-col w-[50%] p-5 items-center"
+            onSubmit={formik.handleSubmit}
+            action=""
+          >
+            <input
+              className="form-input"
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Enter Name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.name && formik.errors.name ? (
+              <p>{formik.errors.name}</p>
+            ) : null}
+            <input
+              className="form-input"
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Enter email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.email && formik.errors.email ? (
+              <p>{formik.errors.email}</p>
+            ) : null}
+
+            <button className="bg-primary w-fit " type="submit">
+              Submit
+            </button>
+          </form>
+        </div>
+        <div className="h-[60%] w-[100%]">
+          <h1>Upcoming Events</h1>
+          {events.map((event) => (
+            <>
+              <li className="list-none">{event.name}</li>
+              <li className="list-none">{event.description}</li>
+            </>
+          ))}
+        </div>
       </div>
       <div className="h-[100%] w-[50%]">
-        <div className="h-[100%] w-[100%]"> FAQ</div>
+        <div className="h-[100%] w-[100%]">
+          {faqs.map((faq) => (
+            <>
+              <li>{faq.question}</li>
+              <li>{faq.answer}</li>
+            </>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -290,7 +346,7 @@ const herd = {
   },
   "horse": {
     name: "Horse",
-    img: horse,
+    img: horseP,
     bio: "Temporibus velit enim, libero accusantium labore vel. Facilis,commodi reprehenderit? Et natus modi ipsam itaque, ad debitis nonvoluptate rerum tempora culpa quae laborum repellat, estnecessitatibus, soluta quo",
   },
   "horse2": {
@@ -300,20 +356,73 @@ const herd = {
   },
 };
 
-const about = {
+const aboutType = {
   "about1": {
-    img: horse,
-    header: "Header for about1",
-    body: "Text here",
+    img: pic_individual,
+    header: "Individual Sessions",
+    body: "We offer private sessions, tailored to your individual needs. We work with clients to create bespoke programs available from child to adult.\n\nThese sessions involve structured activities designed to facilitate personal goals and enhance well-being, connection and self-awareness.",
   },
   "about2": {
-    img: horse,
-    header: "Header for about2",
-    body: "Text here",
+    img: pic_group,
+    header: "Group Sessions",
+    body: "Working in groups can help to build trust, facilitate supportive connections, develop communication and inspire collaboration. In collaboration with a group coordinator, we design a tailor-made program to suit specific group needs.\n\nGroup sessions are available as one day packages, or over a weekly basis for a pre-determined time frame. Please get in touch to discuss.",
   },
   "about3": {
-    img: horse,
-    header: "Header for about3",
-    body: "Text here",
+    img: pic_workshops,
+    header: "Workshops",
+    body: "Workshops give the advantage of a shared lens to facilitate personal growth and self- development central to a specific theme.\n\nWorkshops run over a one or two-day period, with lunch provided at an extra cost. Workshops are based out of our facilities on the idyllic Fleurieu Peninsula of South Australia.\n\nIf you are interested in hosting a workshop at your own facilities in South Australia or interstate, please get in touch via our Contact page.",
+  },
+  "about4": {
+    img: pic_retreat,
+    header: "Retreats",
+    body: "Working with and learning from horses can bring a dynamic and uplifting element to your retreat package. We have beautiful facilities near the popular coastal destination of Port Elliot in South Australia. Please get in touch for more information on our bespoke retreat workshops.",
+  },
+  "about5": {
+    img: pic_collab,
+    header: "Collaboration",
+    body: "Is there something you want to share with the world? Do you need a powerful platform? We are open to collaborating with various modalities whose values and ethics align with the invitational approach of Equus & Awareness. Book a free 30 minute discovery call to kickstart your idea via the Contact page.",
+  },
+  "about6": {
+    img: pic_riders,
+    header: "For Riders & Horse Owners",
+    body: "If you have your own horse, we offer private sessions at your own home or agistment. These sessions are a great opportunity to strengthen the connection with your horse, and meet each other with a fresh perspective. These sessions are designed as personal development sessions, but as a result can help to understand horsemanship difficulties.",
   },
 };
+
+const faqs = [
+  {
+    "question": "Question 1",
+    "answer": "Answer 1",
+  },
+  {
+    "question": "Question 2",
+    "answer": "Answer 2",
+  },
+  {
+    "question": "Question 3",
+    "answer": "Answer 3",
+  },
+  {
+    "question": "Question 4",
+    "answer": "Answer 4",
+  },
+];
+
+const events = [
+  {
+    "name": "Event Name",
+    "description": "Descrip 1",
+  },
+  {
+    "name": "Event Name 2",
+    "description": "Descrip 2",
+  },
+  {
+    "name": "Event Name 3",
+    "description": "Descrip 3",
+  },
+  {
+    "name": "Event Name 4",
+    "description": "Descrip 4",
+  },
+];
