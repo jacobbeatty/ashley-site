@@ -2,8 +2,6 @@ import "./App.css";
 // import "./components/Nav";
 import { ReactComponent as Logo } from "./images/LOGO.svg";
 import { ReactComponent as LogoText } from "./images/Logo Text.svg";
-import horse from "./images/horse.jpg";
-import horseP from "./images/horsePortrait.jpg";
 import pic_individual from "./images/AboutPics/Individual.png";
 import pic_group from "./images/AboutPics/Group.png";
 import pic_workshops from "./images/AboutPics/Workshops.png";
@@ -11,21 +9,15 @@ import pic_whatis from "./images/AboutPics/WhatIs.png";
 import pic_retreat from "./images/AboutPics/Retreat.png";
 import pic_collab from "./images/AboutPics/Collab.png";
 import pic_riders from "./images/AboutPics/Riders.png";
+import star from "./images/HerdPics/star.png";
+import bell from "./images/HerdPics/bell.png";
+import fern from "./images/HerdPics/fern.png";
+import ash from "./images/HerdPics/ash.png";
 
-import ash from "./images/For Jake 2.jpeg";
-import { ReactComponent as Dot } from "./images/dot.svg";
 import * as Yup from "yup";
-import { useState } from "react";
-import {
-  Routes,
-  Route,
-  Link,
-  NavLink,
-  useLocation,
-  useParams,
-  Outlet,
-} from "react-router-dom";
-import { animate, AnimatePresence, motion } from "framer-motion";
+
+import { Routes, Route, NavLink, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { useFormik } from "formik";
 
 export default function App() {
@@ -39,12 +31,9 @@ export default function App() {
       <div className=" h-screen w-screen">
         <AnimatePresence exitBeforeEnter>
           <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Home2 />} />
+            <Route path="/" element={<Home />} />
             <Route path="about" element={<About />} />
-            <Route path="meet" element={<MeetTheHerd />}>
-              <Route path="" element={<HerdIndex />} />
-              <Route path=":slug" element={<HerdMember />} />
-            </Route>
+            <Route path="meet" element={<MeetTheHerd />} />
             <Route path="contact" element={<Contact />} />
             <Route path="*" element={<Home />} />
           </Routes>
@@ -96,13 +85,6 @@ function Nav() {
   );
 }
 
-// const NavBarIcon = ({ icon, text = "tooltip" }) => (
-//   <div className="navbar-icon group">
-//     {icon}
-//     <span className="navbar-tooltip group-hover:scale-100">{text}</span>
-//   </div>
-// );
-
 function Home() {
   return (
     <motion.div
@@ -116,34 +98,22 @@ function Home() {
     </motion.div>
   );
 }
-function Home2() {
-  return (
-    <motion.div
-      className="content flex-col bg-[url('./images/horse.jpg')] bg-center bg-no-repeat brightness-75"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <Logo className=" justify-center flex" />
-      <LogoText className=" absolute right-10 top-10" />
-    </motion.div>
-  );
-}
 
 function About() {
   const whatHeader = "What is Equine Facilitated Learning?";
   return (
-    <div className="content flex  flex-col p-10">
-      <motion.div
-        className="h-[100%] w-[100%]"
-        key={"about"}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        <div className="flex flex-row  pb-8">
-          <div className="w-[68%] backdrop-blur-sm bg-white/30 ">
-            <h1 className=" text-5xl">
+    <motion.div
+      className="h-[100%] w-[100%]"
+      key={"about"}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      {" "}
+      <div className="content flex  flex-col p-2 lg:p-10 svg-bg">
+        <div className="flex flex-col md:flex-row md:pb-8">
+          <div className="w-[100%] lg:w-[68%] bgClear p-5">
+            <h1 className="text-xl md:text-4xl lg:text-5xl">
               <strong>
                 <em>{whatHeader}</em>
               </strong>
@@ -176,81 +146,59 @@ function About() {
               supportive environment to learn about ourselves and others."
             </p>
           </div>
-          <img className="w-[32%] object-cover object-top " src={pic_whatis} />
+          <img
+            className="hidden lg:block w-[32%] object-cover object-top "
+            src={pic_whatis}
+            alt="horse and lady"
+          />
         </div>
-        <div className="flex flex-row flex-wrap  justify-between">
+        <div className=" flex flex-row flex-wrap  justify-between">
           {Object.entries(aboutType).map(([slug, { header, img, body }]) => (
-            <div className="w-[50%] md:w-[32%] backdrop-blur-sm bg-white/30">
-              <h1 className="bg-blue text-center body-text-sizing text-md">
+            <div className=" mb-2 w-[100%] md:w-[50%] lg:w-[32%] bgClear">
+              <h1 className="bg-blue text-green text-center body-text-sizing">
                 <strong>
                   <em>{header}</em>
                 </strong>
               </h1>
               <img className="w-[100%] object-cover " src={img} alt={slug} />
-              <p className=" body-text-sizing whitespace-pre-wrap text-center ">
+              <p className="p-5 body-text-sizing whitespace-pre-wrap text-center ">
                 {body}
               </p>
             </div>
           ))}
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 }
 
 function MeetTheHerd() {
   return (
-    <div className="hundo">
-      <Outlet />
-    </div>
-  );
-}
-
-function HerdIndex() {
-  return (
-    <div className="flex flex-row justify-center hundo p-[2%]">
-      {Object.entries(herd).map(([slug, { name, img }]) => (
-        <div className="pr-10 self-center" key={slug}>
-          <Link to={`/meet/${slug}`}>
-            <h2 className="bg-blue w-[fit-content]">{name}</h2>
-            <img
-              className="h-[80%] w-[50vw]  object-cover object-center"
-              src={img}
-              alt=""
-            />
-          </Link>
+    <motion.div
+      className="h-[100%] w-[100%]"
+      key={"herd"}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <div className="content flex  flex-col p-2 lg:p-10 svg-bg">
+        <div className="flex flex-row flex-wrap lg:flex-nowrap lg:overflow-x-scroll justify-between ">
+          {Object.entries(herd).map(([slug, { name, img, bio }]) => (
+            <div className=" m-2 w-[99%] md:w-[46%] lg:w-[30%] min-w-[35%] bgClear">
+              <img className="w-[100%]  object-cover " src={img} alt={slug} />
+              <h1 className="bg-blue text-green text-center body-text-sizing">
+                <strong>
+                  <em>{name}</em>
+                </strong>
+              </h1>
+              <p className="p-5 body-text-sizing whitespace-pre-wrap text-center ">
+                {bio}
+              </p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  );
-}
-
-function HerdMember() {
-  const { slug } = useParams();
-  const herdMember = herd[slug];
-  if (!herdMember) {
-    return <h2>Not Found!</h2>;
-  }
-
-  const { name, bio, img } = herdMember;
-  return (
-    // <div className="">
-    //   <h1>{name}</h1>
-    //   <img className=" w-[50vw]  object-cover object-center" src={img}></img>
-    //   <h2>{bio}</h2>
-    // </div>
-    <div className="flex flex-row h-[100%] w-[100%] p-[2%]">
-      <div className=" h-[100%] w-[50%]">
-        <img className="bio-image" src={img} />
       </div>
-      <div className="h-[100%] w-[50%] mt-[1%]">
-        <h2 className="bg-blue ml-[-30px] h-[fit-content] w-[fit-content]">
-          {name}
-        </h2>
-
-        <h1 className="bg-bgPink mt-[1%] ml-[-30px]">{bio}</h1>
-      </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -259,100 +207,135 @@ function Contact() {
     initialValues: {
       name: "",
       email: "",
+      message: "",
     },
     validationSchema: Yup.object({
-      name: Yup.string()
-        .max(30, "Must be 30 characters or less")
-        .required("Please include your name :)"),
-      email: Yup.string()
-        .email("Must be a valid email address")
-        .required("Please include your email :)"),
+      name: Yup.string().max(30, "Must be 30 characters or less").required(),
+      email: Yup.string().email().required(),
+      message: Yup.string().min(4, "Please include your message :)").required(),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      alert(JSON.stringify(values, null, 2));
     },
   });
 
   return (
-    <div className="content flex-col md:flex-row p-5">
-      <div className="flex-col h-[100%] w-[50%]">
-        <div className="flex h-[40%] w-[100%] items-center">
-          <form
-            className="flex flex-col w-[50%] p-5 items-center"
-            onSubmit={formik.handleSubmit}
-            action=""
-          >
-            <input
-              className="form-input"
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Enter Name"
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.name && formik.errors.name ? (
-              <p>{formik.errors.name}</p>
-            ) : null}
-            <input
-              className="form-input"
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Enter email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.email && formik.errors.email ? (
-              <p>{formik.errors.email}</p>
-            ) : null}
+    <motion.div
+      className="h-[100%] w-[100%]"
+      key={"contact"}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <div className="content flex   p-2 lg:p-10 svg-bg justify-between">
+        {/* Left pane */}
+        <div className="flex-col h-[100%] w-[49%] flex justify-between body-text-sizing">
+          <div className="flex flex-col h-[38%] w-[100%] items-center bgClear ">
+            <h1 className=" text-4xl font-bold italic bg-blue text-center  w-fit mt-[-2vh] pl-2 pr-2">
+              Contact
+            </h1>
+            <form
+              className="flex flex-col w-full p-5 items-center"
+              onSubmit={formik.handleSubmit}
+              action=""
+            >
+              <input
+                className={`${
+                  formik.errors.name ? "border-red-500" : ""
+                } form-input`}
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Enter Name"
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.touched.name && formik.errors.name ? <></> : null}
+              <input
+                className="form-input"
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.touched.name && formik.errors.email ? <></> : null}
 
-            <button className="bg-primary w-fit " type="submit">
-              Submit
-            </button>
-          </form>
+              <textarea
+                className="form-input h-[15vh] resize-none"
+                id="message"
+                name="message"
+                type="message"
+                placeholder="Enter message"
+                value={formik.values.message}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              {formik.touched.message && formik.errors.message ? <></> : null}
+
+              <button className="bg-blue p-2 w-fit ml-auto" type="submit">
+                Send →
+              </button>
+            </form>
+          </div>
+          <div className="flex flex-col h-[58%] w-[100%] items-center bgClear">
+            <h1 className=" text-4xl font-bold italic bg-blue text-center  w-fit mt-[-2vh] pl-2 pr-2">
+              Workshops
+            </h1>
+            {events.map((event) => (
+              <>
+                <li className="list-none">{event.name}</li>
+                <li className="list-none">{event.description}</li>
+              </>
+            ))}
+          </div>
         </div>
-        <div className="h-[60%] w-[100%]">
-          <h1>Upcoming Events</h1>
-          {events.map((event) => (
-            <>
-              <li className="list-none">{event.name}</li>
-              <li className="list-none">{event.description}</li>
-            </>
-          ))}
+        {/* Right pane */}
+        <div className="h-[100%] w-[49%] body-text-sizing">
+          <div className="h-[100%] w-[100%] bgClear p-6 list-none flex flex-col align-middle items-center">
+            <h1 className=" text-4xl font-bold italic bg-blue text-center w-fit mt-[-3vh] pl-2 pr-2">
+              FAQ
+            </h1>
+
+            <div>
+              {faqs.map((faq) => (
+                <>
+                  <li className=" font-bold">{faq.question}</li>
+                  <li>{faq.answer}</li>
+                  <br></br>
+                </>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-      <div className="h-[100%] w-[50%]">
-        <div className="h-[100%] w-[100%]">
-          {faqs.map((faq) => (
-            <>
-              <li>{faq.question}</li>
-              <li>{faq.answer}</li>
-            </>
-          ))}
-        </div>
-      </div>
-    </div>
+    </motion.div>
   );
 }
 
 const herd = {
+  "star": {
+    name: "Star",
+    img: star,
+    bio: "Star is a 16hh bay Thoroughbred mare. Star has come from a racing background, but much prefers chasing chickens away from her food than the finishing line. To follow Star’s adventures, see the Equus & Awareness Instagram link.",
+  },
+  "bell": {
+    name: "Bell",
+    img: bell,
+    bio: "Bell is a 15.1hh dappled grey Stockhorse. Bell has seen it all in her long lifetime of over 35 years. She is a wise old soul now enjoying a quieter life, sharing her gulf of wisdom in Equine Facilitated Awareness sessions and workshops. She is a natural teacher, for humans and horses alike.",
+  },
+  "fern": {
+    name: "Fern",
+    img: fern,
+    bio: "Fern is an Australian Cattle Dog. She is full of fun and very cheeky. Fern has a naturalherding instinct and is still learning that horses are not cattle, and don’t need rounding up. She enjoys their presence from a distance and will occasionally come to private sessions. She is very friendly, and loves to be around human companions.",
+  },
   "ash": {
     name: "Ashley",
     img: ash,
-    bio: "Temporibus velit enim, libero accusantium labore vel. Facilis,commodi reprehenderit? Et natus modi ipsam itaque, ad debitis nonvoluptate rerum tempora culpa quae laborum repellat, estnecessitatibus, soluta quo",
-  },
-  "horse": {
-    name: "Horse",
-    img: horseP,
-    bio: "Temporibus velit enim, libero accusantium labore vel. Facilis,commodi reprehenderit? Et natus modi ipsam itaque, ad debitis nonvoluptate rerum tempora culpa quae laborum repellat, estnecessitatibus, soluta quo",
-  },
-  "horse2": {
-    name: "Horse 2",
-    img: ash,
-    bio: "Temporibus velit enim, libero accusantium labore vel. Facilis,commodi reprehenderit? Et natus modi ipsam itaque, ad debitis nonvoluptate rerum tempora culpa quae laborum repellat, estnecessitatibus, soluta quo",
+    bio: "Ashley is a qualified Equine Facilitated Learning Practitioner. Ashley co-facilitates with horses, aiming to foster self-awareness and inspire people of all ages and backgrounds to connect with their strengths and potential that has always been there. To follow Ashley’s horsemanship journey, follow the Instagram link.",
   },
 };
 
@@ -391,20 +374,30 @@ const aboutType = {
 
 const faqs = [
   {
-    "question": "Question 1",
-    "answer": "Answer 1",
+    "question": "What do I wear?",
+    "answer":
+      "Please wear comfy clothes and closed toed shoes to your Equine Facilitated Learning session or workshop.",
   },
   {
-    "question": "Question 2",
-    "answer": "Answer 2",
+    "question":
+      "But I don’t have any horse experience.. I’m scared of horses..",
+    "answer":
+      "No worries! A lot of people with no previous horse experience come to our sessions. In fact, it is a great way to have your very first horse experience in a calm, safe and supportive environment.",
   },
   {
-    "question": "Question 3",
-    "answer": "Answer 3",
+    "question": "Is it safe?",
+    "answer":
+      "It can seem intimidating working with such large and powerful animals for the first time but our sessions are kept safe by trained individuals who hold safety as their number one priority. We adopt an invitational approach, and no one is ever forced to do anything they don’t want to or don’t feel safe doing.",
   },
   {
-    "question": "Question 4",
-    "answer": "Answer 4",
+    "question": "What if it’s raining?",
+    "answer":
+      "Sometimes the weather has other ideas! There is no reason we can’t work with a rainy environment, especially as we have enclosed facilities. However, if the weather is just too hot (or wild) to handle, a full reimbursement or change of session will be offered. Please dress weather appropriate.",
+  },
+  {
+    "question": "Payment",
+    "answer":
+      "Please pay in advance for your session or workshop via bank transfer.",
   },
 ];
 

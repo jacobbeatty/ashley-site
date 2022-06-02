@@ -38,8 +38,9 @@ module.exports = {
       colors: {
         primary: "#EFD8C6",
         secondary: "#283021",
-        blue: "#7ea3d2",
+        blue: "#9EC0E7",
         bgPink: "rgb(185,147,130,75%)",
+        clear: "#FFFFFF",
       },
     },
   },

@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+html {
   background-color: #efd8c6;
-  background-image: url("./images/AboutPics/Mask\ Group\ 2.svg");
 }
 
 @layer components {
+  .svg-bg {
+    background-image: url("./images/bg.svg");
+  }
   .navbar-icon {
     @apply relative flex items-center justify-center h-12 w-12 mt-2 mb-2 mx-auto shadow-lg bg-white text-cyan-300 hover:text-black rounded-3xl hover:rounded-xl transition-all duration-300 ease-linear cursor-pointer;
   }
@@ -41,9 +43,16 @@ body {
     @apply h-[100%] w-[100%];
   }
   .form-input {
-    @apply m-2 rounded-l;
+    @apply m-1 w-full backdrop-blur-sm bg-clear/40 shadow-sm placeholder-slate-400
+    focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+    disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+    invalid:border-pink-500 invalid:text-pink-600
+    focus:invalid:border-pink-500 focus:invalid:ring-pink-500 border border-slate-300 rounded-md;
   }
   .body-text-sizing {
     @apply sm:text-xs md:text-lg lg:text-base;
+  }
+  .bgClear {
+    @apply backdrop-blur-md bg-clear/30;
   }
 }
