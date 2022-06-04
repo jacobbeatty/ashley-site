@@ -1,7 +1,7 @@
 import "./App.css";
 // import "./components/Nav";
 import { ReactComponent as Logo } from "./images/LOGO.svg";
-import { ReactComponent as LogoText } from "./images/Logo Text.svg";
+// import { ReactComponent as LogoText } from "./images/Logo Text.svg";
 import pic_individual from "./images/AboutPics/Individual.png";
 import pic_group from "./images/AboutPics/Group.png";
 import pic_workshops from "./images/AboutPics/Workshops.png";
