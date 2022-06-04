@@ -33,7 +33,10 @@ export default function App() {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="about" element={<About />} />
+            <Route path="about2" element={<About2 />} />
             <Route path="meet" element={<MeetTheHerd />} />
+            <Route path="meet2" element={<MeetTheHerd2 />} />
+
             <Route path="contact" element={<Contact />} />
             <Route path="*" element={<Home />} />
           </Routes>
@@ -44,7 +47,7 @@ export default function App() {
 }
 function Nav() {
   return (
-    <div className="bg-secondary text-primary text-2xl fixed top-0 left-0 h-screen w-0 sm:w-40 m-0 flex flex-col justify-center items-center invisible sm:visible">
+    <div className="bg-secondary text-primary text-2xl fixed z-50 top-0 left-0 h-screen w-0 sm:w-40 m-0 flex flex-col justify-center items-center invisible sm:visible">
       <ul className=" transform rotate-90 font-main font-semibold text-4xl flex flex-row items-center whitespace-nowrap w-0 sm:w-[100vh] place-content-evenly">
         <NavLink
           to="/"
@@ -55,7 +58,7 @@ function Nav() {
           Home
         </NavLink>
         <NavLink
-          to="/about"
+          to="/about2"
           className={({ isActive }) =>
             isActive ? " text-blue border-b-4 border-current" : ""
           }
@@ -63,7 +66,7 @@ function Nav() {
           About
         </NavLink>
         <NavLink
-          to="/meet"
+          to="/meet2"
           className={({ isActive }) =>
             isActive ? " text-blue border-b-4 border-current" : ""
           }
@@ -88,13 +91,13 @@ function Nav() {
 function Home() {
   return (
     <motion.div
-      className="content flex-col p-10"
+      className="content flex-col p-10 img-bg bg-cover"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <Logo className=" justify-center flex" />
-      <LogoText className=" absolute right-10 top-10" />
+      <Logo className=" justify-center flex w-[40%]" />
+      {/* <LogoText className=" absolute right-10 top-10" /> */}
     </motion.div>
   );
 }
@@ -109,8 +112,8 @@ function About() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {" "}
-      <div className="content flex  flex-col p-2 lg:p-10 svg-bg">
+      <div className="fixed h-[100%] w-[100%] svg-bg"></div>
+      <div className="content flex  flex-col p-2 lg:p-10 ">
         <div className="flex flex-col md:flex-row md:pb-8">
           <div className="w-[100%] lg:w-[68%] bgClear p-5">
             <h1 className="text-xl md:text-4xl lg:text-5xl">
@@ -172,6 +175,85 @@ function About() {
   );
 }
 
+function About2() {
+  const whatHeader = "What is Equine Facilitated Learning?";
+  return (
+    <motion.div
+      className="h-[100%] w-[100%]"
+      key={"about2"}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <div className="fixed h-[100%] w-[100%] svg-bg"></div>
+      <div className="content flex  flex-col p-2 lg:p-10 ">
+        <div className="flex flex-col md:flex-row md:pb-8">
+          <div className="w-[100%] lg:w-[68%] bgClear p-5">
+            <h1 className="text-xl md:text-4xl lg:text-5xl">
+              <strong>
+                <em>{whatHeader}</em>
+              </strong>
+            </h1>
+            <p className="body-text-sizing whitespace-pre-line">
+              Horses and humans have been in conversation for thousands of
+              years.
+              <br></br>
+              <br></br>
+              <strong>Equine Facilitated Learning</strong> is a space to
+              participate in this powerful conversation. Horses are sentient
+              beings that mirror back to us our thoughts and feelings, and to
+              share space with such a powerful animal can shift us in profound
+              ways.
+              <br></br>
+              <br></br>
+              Horses can help us gain clarity on what we are experiencing and
+              feeling in a <strong>non-judgemental</strong> way, and being
+              around{" "}
+              <strong>
+                horses can help us to trust and be honest with ourselves.
+              </strong>
+              <br></br>
+              <br></br>
+              When we take responsibility forourselves, we open doors to living
+              life in a way that honors our powerful potential.
+              <br></br>
+              <br></br>
+              <strong>Equus & Awareness</strong> facilitates a safe and
+              supportive environment to learn about ourselves and others."
+            </p>
+          </div>
+          <img
+            className="hidden lg:block w-[32%] object-cover object-top "
+            src={pic_whatis}
+            alt="horse and lady"
+          />
+        </div>
+        <div className=" flex flex-row flex-wrap  justify-between">
+          {Object.entries(aboutType).map(([slug, { header, img, body }]) => (
+            <div className=" mb-2 w-[100%] md:w-[50%] lg:w-[32%] bgClear">
+              <h1 className="bg-blue text-green text-center body-text-sizing">
+                <strong>
+                  <em>{header}</em>
+                </strong>
+              </h1>
+              <div className="group hover:">
+                <img
+                  className="w-[100%] object-cover group-hover:blur-lg group-hover:opacity-40  duration-300 "
+                  src={img}
+                  alt={slug}
+                />
+                <p className="middle font-bold p-5 body-text-sizing whitespace-pre-wrap text-center w-fit group-hover:opacity-100">
+                  {body}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 function MeetTheHerd() {
   return (
     <motion.div
@@ -181,10 +263,12 @@ function MeetTheHerd() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="content flex  flex-col p-2 lg:p-10 svg-bg">
-        <div className="flex flex-row flex-wrap lg:flex-nowrap lg:overflow-x-scroll justify-between ">
+      <div className="fixed h-[100%] w-[100%] svg-bg"></div>
+
+      <div className="content flex  flex-col p-2 lg:pl-6 ">
+        <div className="flex flex-row flex-wrap lg:flex-nowrap  justify-between ">
           {Object.entries(herd).map(([slug, { name, img, bio }]) => (
-            <div className=" m-2 w-[99%] md:w-[46%] lg:w-[30%] min-w-[35%] bgClear">
+            <div className="h-auto m-2 w-[99%] md:w-[46%] lg:w-[30%] min-w-[31%] bgClear text-webkit-center">
               <img className="w-[100%]  object-cover " src={img} alt={slug} />
               <h1 className="bg-blue text-green text-center body-text-sizing">
                 <strong>
@@ -194,6 +278,44 @@ function MeetTheHerd() {
               <p className="p-5 body-text-sizing whitespace-pre-wrap text-center ">
                 {bio}
               </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function MeetTheHerd2() {
+  return (
+    <motion.div
+      className="h-[100%] w-[100%]"
+      key={"herd2"}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <div className="fixed h-[100%] w-[100%] svg-bg"></div>
+
+      <div className="content flex  flex-col p-2 lg:pl-6 justify-center">
+        <div className=" flex flex-row flex-wrap lg:flex-nowrap  justify-between ">
+          {Object.entries(herd).map(([slug, { name, img, bio }]) => (
+            <div className=" m-2 w-[99%] md:w-[46%] lg:w-[30%] min-w-[31%] bgClear text-webkit-center">
+              <div className="group hover:">
+                <img
+                  className="group-hover:blur-lg group-hover:opacity-40  duration-300 w-[100%]  object-cover h-[100%]"
+                  src={img}
+                  alt={slug}
+                />
+                <p className="middle p-5 body-text-sizing whitespace-pre-wrap text-center w-fit group-hover:opacity-100">
+                  {bio}
+                </p>
+              </div>
+              <h1 className="bg-blue text-green text-center body-text-sizing">
+                <strong>
+                  <em>{name}</em>
+                </strong>
+              </h1>
             </div>
           ))}
         </div>
@@ -227,7 +349,9 @@ function Contact() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="content flex   p-2 lg:p-10 svg-bg justify-between">
+      <div className="fixed h-[100%] w-[100%] svg-bg"></div>
+
+      <div className="content flex   p-2 lg:p-10  justify-between">
         {/* Left pane */}
         <div className="flex-col h-[100%] w-[49%] flex justify-between body-text-sizing">
           <div className="flex flex-col h-[38%] w-[100%] items-center bgClear ">
@@ -295,7 +419,7 @@ function Contact() {
         </div>
         {/* Right pane */}
         <div className="h-[100%] w-[49%] body-text-sizing">
-          <div className="h-[100%] w-[100%] bgClear p-6 list-none flex flex-col align-middle items-center">
+          <div className="h-auto min-h-[100%] w-[100%] bgClear p-6 list-none flex flex-col align-middle items-center">
             <h1 className=" text-4xl font-bold italic bg-blue text-center w-fit mt-[-3vh] pl-2 pr-2">
               FAQ
             </h1>
@@ -358,17 +482,17 @@ const aboutType = {
   "about4": {
     img: pic_retreat,
     header: "Retreats",
-    body: "Working with and learning from horses can bring a dynamic and uplifting element to your retreat package. We have beautiful facilities near the popular coastal destination of Port Elliot in South Australia. Please get in touch for more information on our bespoke retreat workshops.",
+    body: "Working with and learning from horses can bring a dynamic and uplifting element to your retreat package. We have beautiful facilities near the popular coastal destination of Port Elliot in South Australia. \n\nPlease get in touch for more information on our bespoke retreat workshops.",
   },
   "about5": {
     img: pic_collab,
     header: "Collaboration",
-    body: "Is there something you want to share with the world? Do you need a powerful platform? We are open to collaborating with various modalities whose values and ethics align with the invitational approach of Equus & Awareness. Book a free 30 minute discovery call to kickstart your idea via the Contact page.",
+    body: "Is there something you want to share with the world? Do you need a powerful platform? \n\nWe are open to collaborating with various modalities whose values and ethics align with the invitational approach of Equus & Awareness.\n\n Book a free 30 minute discovery call to kickstart your idea via the Contact page.",
   },
   "about6": {
     img: pic_riders,
     header: "For Riders & Horse Owners",
-    body: "If you have your own horse, we offer private sessions at your own home or agistment. These sessions are a great opportunity to strengthen the connection with your horse, and meet each other with a fresh perspective. These sessions are designed as personal development sessions, but as a result can help to understand horsemanship difficulties.",
+    body: "If you have your own horse, we offer private sessions at your own home or agistment.\n\n These sessions are a great opportunity to strengthen the connection with your horse, and meet each other with a fresh perspective.\n\n These sessions are designed as personal development sessions, but as a result can help to understand horsemanship difficulties.",
   },
 };
 

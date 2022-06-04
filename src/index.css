@@ -10,6 +10,26 @@ html {
   .svg-bg {
     background-image: url("./images/bg.svg");
   }
+  .img-bg {
+    background-image: url("./images/BG.png");
+  }
+  .img-bg {
+    background-image: url("./images/BG2.png");
+  }
+  .text-webkit-center {
+    text-align: -webkit-center;
+  }
+
+  .middle {
+    transition: 0.5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
   .navbar-icon {
     @apply relative flex items-center justify-center h-12 w-12 mt-2 mb-2 mx-auto shadow-lg bg-white text-cyan-300 hover:text-black rounded-3xl hover:rounded-xl transition-all duration-300 ease-linear cursor-pointer;
   }
