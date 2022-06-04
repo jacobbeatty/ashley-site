@@ -7,6 +7,9 @@ html {
 }
 
 @layer components {
+  p {
+    line-height: 2;
+  }
   .svg-bg {
     background-image: url("./images/bg.svg");
   }
@@ -70,7 +73,7 @@ html {
     focus:invalid:border-pink-500 focus:invalid:ring-pink-500 border border-slate-300 rounded-md;
   }
   .body-text-sizing {
-    @apply sm:text-xs md:text-lg lg:text-base;
+    @apply sm:text-xs md:text-md lg:text-sm xl:text-base;
   }
   .bgClear {
     @apply backdrop-blur-md bg-clear/30;
