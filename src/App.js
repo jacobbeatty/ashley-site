@@ -214,7 +214,7 @@ function About2() {
               </strong>
               <br></br>
               <br></br>
-              When we take responsibility forourselves, we open doors to living
+              When we take responsibility for ourselves, we open doors to living
               life in a way that honors our powerful potential.
               <br></br>
               <br></br>
