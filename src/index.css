@@ -7,9 +7,9 @@ html {
 }
 
 @layer components {
-  p {
+  /* p {
     line-height: 2;
-  }
+  } */
   .svg-bg {
     background-image: url("./images/bg.svg");
   }

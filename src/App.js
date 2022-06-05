@@ -198,13 +198,11 @@ function About2() {
               Horses and humans have been in conversation for thousands of
               years.
               <br></br>
-              <br></br>
               <strong>Equine Facilitated Learning</strong> is a space to
               participate in this powerful conversation. Horses are sentient
               beings that mirror back to us our thoughts and feelings, and to
               share space with such a powerful animal can shift us in profound
               ways.
-              <br></br>
               <br></br>
               Horses can help us gain clarity on what we are experiencing and
               feeling in a <strong>non-judgemental</strong> way, and being
@@ -213,10 +211,8 @@ function About2() {
                 horses can help us to trust and be honest with ourselves.
               </strong>
               <br></br>
-              <br></br>
               When we take responsibility for ourselves, we open doors to living
               life in a way that honors our powerful potential.
-              <br></br>
               <br></br>
               <strong>Equus & Awareness</strong> facilitates a safe and
               supportive environment to learn about ourselves and others."
@@ -230,7 +226,7 @@ function About2() {
         </div>
         <div className=" flex flex-row flex-wrap  justify-between">
           {Object.entries(aboutType).map(([slug, { header, img, body }]) => (
-            <div className=" mb-2 w-[100%] md:w-[50%] lg:w-[32%] bgClear">
+            <div className=" mb-2 w-[100%] lg:w-[49%] 2xl:w-[32%] bgClear">
               <h1 className="bg-blue text-green text-center body-text-sizing">
                 <strong>
                   <em>{header}</em>
@@ -298,9 +294,9 @@ function MeetTheHerd2() {
       <div className="fixed h-[100%] w-[100%] svg-bg"></div>
 
       <div className="content flex  flex-col p-2 lg:pl-6 justify-center">
-        <div className=" flex flex-row flex-wrap lg:flex-nowrap  justify-between ">
+        <div className=" flex flex-row flex-wrap xl:flex-nowrap  justify-between ">
           {Object.entries(herd).map(([slug, { name, img, bio }]) => (
-            <div className=" m-2 w-[99%] md:w-[46%] lg:w-[30%] min-w-[31%] bgClear text-webkit-center">
+            <div className=" m-2 w-[99%]   min-w-[37%] bgClear text-webkit-center">
               <div className="group hover:">
                 <img
                   className="group-hover:blur-lg group-hover:opacity-40  duration-300 w-[100%]  object-cover h-[100%]"
@@ -467,32 +463,32 @@ const aboutType = {
   "about1": {
     img: pic_individual,
     header: "Individual Sessions",
-    body: "We offer private sessions, tailored to your individual needs. We work with clients to create bespoke programs available from child to adult.\nThese sessions involve structured activities designed to facilitate personal goals and enhance well-being, connection and self-awareness.",
+    body: "We offer private sessions, tailored to your individual needs. We work with clients to create bespoke programs available from child to adult. These sessions involve structured activities designed to facilitate personal goals and enhance well-being, connection and self-awareness.",
   },
   "about2": {
     img: pic_group,
     header: "Group Sessions",
-    body: "Working in groups can help to build trust, facilitate supportive connections, develop communication and inspire collaboration. In collaboration with a group coordinator, we design a tailor-made program to suit specific group needs.\nGroup sessions are available as one day packages, or over a weekly basis for a pre-determined time frame. Please get in touch to discuss.",
+    body: "Working in groups can help to build trust, facilitate supportive connections, develop communication and inspire collaboration. In collaboration with a group coordinator, we design a tailor-made program to suit specific group needs. Group sessions are available as one day packages, or over a weekly basis for a pre-determined time frame. Please get in touch to discuss.",
   },
   "about3": {
     img: pic_workshops,
     header: "Workshops",
-    body: "Workshops give the advantage of a shared lens to facilitate personal growth and self- development central to a specific theme.\nWorkshops run over a one or two-day period, with lunch provided at an extra cost. Workshops are based out of our facilities on the idyllic Fleurieu Peninsula of South Australia.\nIf you are interested in hosting a workshop at your own facilities in South Australia or interstate, please get in touch via our Contact page.",
+    body: "Workshops give the advantage of a shared lens to facilitate personal growth and self- development central to a specific theme. Workshops run over a one or two-day period, with lunch provided at an extra cost. Workshops are based out of our facilities on the idyllic Fleurieu Peninsula of South Australia. If you are interested in hosting a workshop at your own facilities in South Australia or interstate, please get in touch via our Contact page.",
   },
   "about4": {
     img: pic_retreat,
     header: "Retreats",
-    body: "Working with and learning from horses can bring a dynamic and uplifting element to your retreat package. We have beautiful facilities near the popular coastal destination of Port Elliot in South Australia. \nPlease get in touch for more information on our bespoke retreat workshops.",
+    body: "Working with and learning from horses can bring a dynamic and uplifting element to your retreat package. We have beautiful facilities near the popular coastal destination of Port Elliot in South Australia. Please get in touch for more information on our bespoke retreat workshops.",
   },
   "about5": {
     img: pic_collab,
     header: "Collaboration",
-    body: "Is there something you want to share with the world? Do you need a powerful platform? \nWe are open to collaborating with various modalities whose values and ethics align with the invitational approach of Equus & Awareness.\n Book a free 30 minute discovery call to kickstart your idea via the Contact page.",
+    body: "Is there something you want to share with the world? Do you need a powerful platform?  We are open to collaborating with various modalities whose values and ethics align with the invitational approach of Equus & Awareness.  Book a free 30 minute discovery call to kickstart your idea via the Contact page.",
   },
   "about6": {
     img: pic_riders,
     header: "For Riders & Horse Owners",
-    body: "If you have your own horse, we offer private sessions at your own home or agistment.\n These sessions are a great opportunity to strengthen the connection with your horse, and meet each other with a fresh perspective.\n These sessions are designed as personal development sessions, but as a result can help to understand horsemanship difficulties.",
+    body: "If you have your own horse, we offer private sessions at your own home or agistment. These sessions are a great opportunity to strengthen the connection with your horse, and meet each other with a fresh perspective.  These sessions are designed as personal development sessions, but as a result can help to understand horsemanship difficulties.",
   },
 };
 
