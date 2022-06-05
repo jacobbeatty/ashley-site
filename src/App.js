@@ -33,10 +33,10 @@ export default function App() {
         <AnimatePresence exitBeforeEnter>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="about2" element={<About2 />} />
-            <Route path="meet" element={<MeetTheHerd />} />
-            <Route path="meet2" element={<MeetTheHerd2 />} />
+            <Route path="about" element={<About2 />} />
+            <Route path="about2" element={<About />} />
+            <Route path="meet" element={<MeetTheHerd2 />} />
+            <Route path="meet2" element={<MeetTheHerd />} />
 
             <Route path="contact" element={<Contact />} />
             <Route path="*" element={<Home />} />
