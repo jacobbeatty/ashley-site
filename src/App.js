@@ -25,8 +25,9 @@ export default function App() {
 
   return (
     <div className="flex font-main font-semibold ">
-      <div className="flex-none w-0 sm:w-40">
+      <div className=" flex-none w-0 sm:w-40">
         <Nav />
+        <MobileNav />
       </div>
       <div className=" h-screen w-screen">
         <AnimatePresence exitBeforeEnter>
@@ -88,10 +89,53 @@ function Nav() {
   );
 }
 
+function MobileNav() {
+  return (
+    <div className="mobile bg-secondary text-primary text-2xl fixed z-50 top-0 left-0 h-20 w-[100%]  m-0 flex justify-center items-center visible sm:invisible">
+      <ul className="w-[100%] transform  font-main font-semibold text-base flex flex-row items-center whitespace-nowrap w-0 sm:w-[100vh] justify-between place-content-evenly p-4 ">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? " text-blue border-b-4 border-current" : ""
+          }
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/about2"
+          className={({ isActive }) =>
+            isActive ? " text-blue border-b-4 border-current" : ""
+          }
+        >
+          About
+        </NavLink>
+        <NavLink
+          to="/meet2"
+          className={({ isActive }) =>
+            isActive ? " text-blue border-b-4 border-current" : ""
+          }
+        >
+          Meet The Herd
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            isActive ? " text-blue border-b-4 border-current" : ""
+          }
+        >
+          Contact
+        </NavLink>
+      </ul>
+      {/* <div className=" border-l-4 border-secondary w-full absolute right-[-.5rem]"></div> */}
+      {/* <NavBarIcon text="Follow my instagram" icon={<FaInstagram size={28} />} /> */}
+    </div>
+  );
+}
+
 function Home() {
   return (
     <motion.div
-      className="content flex-col p-10 img-bg bg-cover"
+      className="pt-20 sm:pt-0 content flex-col p-10 img-bg bg-cover"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -179,7 +223,7 @@ function About2() {
   const whatHeader = "What is Equine Facilitated Learning?";
   return (
     <motion.div
-      className="h-[100%] w-[100%]"
+      className="pt-20 sm:pt-0 h-[100%] w-[100%]"
       key={"about2"}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -289,7 +333,7 @@ function MeetTheHerd() {
 function MeetTheHerd2() {
   return (
     <motion.div
-      className="h-[100%] w-[100%]"
+      className="pt-20 sm:pt-0 h-[100%] w-[100%]"
       key={"herd2"}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -343,7 +387,7 @@ function Contact() {
 
   return (
     <motion.div
-      className="h-[100%] w-[100%]"
+      className=" h-[100%] w-[100%]"
       key={"contact"}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -351,10 +395,10 @@ function Contact() {
     >
       <div className="fixed h-[100%] w-[100%] svg-bg"></div>
 
-      <div className="content flex   p-2 lg:p-10  justify-between">
+      <div className="content flex flex-col sm:flex-row pt-28 sm:pt-0  p-2 lg:p-10  justify-between">
         {/* Left pane */}
-        <div className="flex-col h-[100%] w-[49%] flex justify-between body-text-sizing">
-          <div className="flex flex-col h-[38%] w-[100%] items-center bgClear ">
+        <div className="flex-col h-fit sm:h-[100%] w-[100%] sm:w-[49%] flex justify-between body-text-sizing">
+          <div className="mb-10 flex flex-col h-fit sm:h-[38%] w-[100%] items-center bgClear ">
             <h1 className=" text-4xl font-bold italic bg-blue text-center  w-fit mt-[-2vh] pl-2 pr-2">
               Contact
             </h1>
@@ -405,7 +449,7 @@ function Contact() {
               </button>
             </form>
           </div>
-          <div className="flex flex-col h-[58%] w-[100%] items-center bgClear">
+          <div className="mb-10 flex flex-col h-fit sm:h-[58%] w-[100%] items-center bgClear">
             <h1 className=" text-4xl font-bold italic bg-blue text-center  w-fit mt-[-2vh] pl-2 pr-2">
               Workshops
             </h1>
@@ -418,7 +462,7 @@ function Contact() {
           </div>
         </div>
         {/* Right pane */}
-        <div className="h-[100%] w-[49%] body-text-sizing">
+        <div className="mb-10 h-fit sm:h-[100%] w-[100%] sm:w-[49%] body-text-sizing">
           <div className="h-auto min-h-[100%] w-[100%] bgClear p-6 list-none flex flex-col align-middle items-center">
             <h1 className=" text-4xl font-bold italic bg-blue text-center w-fit mt-[-3vh] pl-2 pr-2">
               FAQ
