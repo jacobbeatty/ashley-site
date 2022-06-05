@@ -198,11 +198,13 @@ function About2() {
               Horses and humans have been in conversation for thousands of
               years.
               <br></br>
+              <br></br>
               <strong>Equine Facilitated Learning</strong> is a space to
               participate in this powerful conversation. Horses are sentient
               beings that mirror back to us our thoughts and feelings, and to
               share space with such a powerful animal can shift us in profound
               ways.
+              <br></br>
               <br></br>
               Horses can help us gain clarity on what we are experiencing and
               feeling in a <strong>non-judgemental</strong> way, and being
@@ -211,8 +213,10 @@ function About2() {
                 horses can help us to trust and be honest with ourselves.
               </strong>
               <br></br>
+              <br></br>
               When we take responsibility for ourselves, we open doors to living
               life in a way that honors our powerful potential.
+              <br></br>
               <br></br>
               <strong>Equus & Awareness</strong> facilitates a safe and
               supportive environment to learn about ourselves and others."
