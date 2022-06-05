@@ -59,7 +59,7 @@ function Nav() {
           Home
         </NavLink>
         <NavLink
-          to="/about2"
+          to="/about"
           className={({ isActive }) =>
             isActive ? " text-blue border-b-4 border-current" : ""
           }
@@ -67,7 +67,7 @@ function Nav() {
           About
         </NavLink>
         <NavLink
-          to="/meet2"
+          to="/meet"
           className={({ isActive }) =>
             isActive ? " text-blue border-b-4 border-current" : ""
           }
