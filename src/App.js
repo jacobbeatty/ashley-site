@@ -146,7 +146,7 @@ function About() {
               <br></br>
               <br></br>
               <strong>Equus & Awareness</strong> facilitates a safe and
-              supportive environment to learn about ourselves and others."
+              supportive environment to learn about ourselves and others.
             </p>
           </div>
           <img
