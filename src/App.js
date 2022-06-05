@@ -293,7 +293,7 @@ function MeetTheHerd2() {
     >
       <div className="fixed h-[100%] w-[100%] svg-bg"></div>
 
-      <div className="content flex  flex-col p-2 lg:pl-6 justify-center">
+      <div className="content flex  flex-col p-2 lg:pl-6 xl:justify-center">
         <div className=" flex flex-row flex-wrap xl:flex-nowrap  justify-between ">
           {Object.entries(herd).map(([slug, { name, img, bio }]) => (
             <div className=" m-2 w-[99%]   min-w-[37%] bgClear text-webkit-center">
