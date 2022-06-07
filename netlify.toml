@@ -3,6 +3,3 @@
   to = "/"
   status = 200
 
-  [build]
-    functions = "functions/"
-    publish = "src"
