@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <div className="flex font-main font-semibold ">
-      <div className=" flex-none w-0 sm:w-40">
+      <div className=" flex-none w-0 sm:w-32">
         <Nav />
         <MobileNav />
       </div>
@@ -42,7 +42,7 @@ export default function App() {
 }
 function Nav() {
   return (
-    <div className="bg-secondary text-primary text-2xl fixed z-50 top-0 left-0 h-screen w-0 sm:w-40 m-0 flex flex-col justify-center items-center invisible sm:visible">
+    <div className="bg-secondary text-primary text-2xl fixed z-50 top-0 left-0 h-screen w-0 sm:w-32  m-0 flex flex-col justify-center items-center invisible sm:visible">
       <ul className="transform rotate-90 font-main font-semibold text-4xl flex flex-row items-center whitespace-nowrap w-0 sm:w-[100vh] place-content-evenly">
         <NavLink
           to="/"
@@ -129,13 +129,16 @@ function MobileNav() {
 function Home() {
   return (
     <motion.div
-      className="pt-20 sm:pt-0 content flex-col p-10 img-bg bg-cover"
+      className="pt-20 sm:pt-0 content flex-col p-10 img-bg bg-cover justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <Logo className=" justify-center flex w-[40%]" />
+      <Logo className=" justify-center flex mt-[5vh] w-full lg:w-[40%]  " />
       {/* <LogoText className=" absolute right-10 top-10" /> */}
+      <h1 className=" text-center italic text-2xl xl:text-4xl bg-primary">
+        An invitation to awareness, through the language of the horse.
+      </h1>
     </motion.div>
   );
 }
@@ -196,7 +199,7 @@ function AboutContentful() {
             </p>
           </div>
           <img
-            className="hidden lg:block w-[32%] object-cover object-top "
+            className="hidden lg:block w-[55%] xl:w-[40%] object-cover object-top z-10"
             src={pic_whatis}
             alt="horse and lady"
           />
