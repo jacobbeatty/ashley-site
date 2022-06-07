@@ -43,7 +43,7 @@ export default function App() {
 function Nav() {
   return (
     <div className="bg-secondary text-primary text-2xl fixed z-50 top-0 left-0 h-screen w-0 sm:w-40 m-0 flex flex-col justify-center items-center invisible sm:visible">
-      <ul className=" transform rotate-90 font-main font-semibold text-4xl flex flex-row items-center whitespace-nowrap w-0 sm:w-[100vh] place-content-evenly">
+      <ul className="transform rotate-90 font-main font-semibold text-4xl flex flex-row items-center whitespace-nowrap w-0 sm:w-[100vh] place-content-evenly">
         <NavLink
           to="/"
           className={({ isActive }) =>
