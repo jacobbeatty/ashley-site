@@ -1,18 +1,14 @@
 import "./App.css";
 // import "./components/Nav";
 import { ReactComponent as Logo } from "./images/LOGO.svg";
-// import { ReactComponent as LogoText } from "./images/Logo Text.svg";
-import pic_individual from "./images/AboutPics/Individual.png";
-import pic_group from "./images/AboutPics/Group.png";
-import pic_workshops from "./images/AboutPics/Workshops.png";
+
 import pic_whatis from "./images/AboutPics/WhatIs.png";
-import pic_retreat from "./images/AboutPics/Retreat.png";
-import pic_collab from "./images/AboutPics/Collab.png";
-import pic_riders from "./images/AboutPics/Riders.png";
-import star from "./images/HerdPics/star.png";
-import bell from "./images/HerdPics/bell.png";
-import fern from "./images/HerdPics/fern.png";
-import ash from "./images/HerdPics/ash.png";
+
+import useContentful from "./useContentful";
+
+import { useEffect, useState } from "react";
+import MemberCard from "./components/MemberCard";
+import AboutCard from "./components/AboutCard";
 
 import * as Yup from "yup";
 
@@ -33,10 +29,8 @@ export default function App() {
         <AnimatePresence exitBeforeEnter>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
-            <Route path="about" element={<About2 />} />
-            <Route path="about2" element={<About />} />
-            <Route path="meet" element={<MeetTheHerd2 />} />
-            <Route path="meet2" element={<MeetTheHerd />} />
+            <Route path="about" element={<AboutContentful />} />
+            <Route path="meet" element={<MeetTheHerdContentful />} />
 
             <Route path="contact" element={<Contact />} />
             <Route path="*" element={<Home />} />
@@ -146,85 +140,20 @@ function Home() {
   );
 }
 
-function About() {
+function AboutContentful() {
   const whatHeader = "What is Equine Facilitated Learning?";
-  return (
-    <motion.div
-      className="h-[100%] w-[100%]"
-      key={"about"}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <div className="fixed h-[100%] w-[100%] svg-bg"></div>
-      <div className="content flex  flex-col p-2 lg:p-10 ">
-        <div className="flex flex-col md:flex-row md:pb-8">
-          <div className="w-[100%] lg:w-[68%] bgClear p-5">
-            <h1 className="text-xl md:text-4xl lg:text-5xl">
-              <strong>
-                <em>{whatHeader}</em>
-              </strong>
-            </h1>
-            <p className="body-text-sizing whitespace-pre-line">
-              Horses and humans have been in conversation for thousands of
-              years.
-              <br></br>
-              <br></br>
-              <strong>Equine Facilitated Learning</strong> is a space to
-              participate in this powerful conversation. Horses are sentient
-              beings that mirror back to us our thoughts and feelings, and to
-              share space with such a powerful animal can shift us in profound
-              ways.
-              <br></br>
-              <br></br>
-              Horses can help us gain clarity on what we are experiencing and
-              feeling in a <strong>non-judgemental</strong> way, and being
-              around{" "}
-              <strong>
-                horses can help us to trust and be honest with ourselves.
-              </strong>
-              <br></br>
-              <br></br>
-              When we take responsibility forourselves, we open doors to living
-              life in a way that honors our powerful potential.
-              <br></br>
-              <br></br>
-              <strong>Equus & Awareness</strong> facilitates a safe and
-              supportive environment to learn about ourselves and others.
-            </p>
-          </div>
-          <img
-            className="hidden lg:block w-[32%] object-cover object-top "
-            src={pic_whatis}
-            alt="horse and lady"
-          />
-        </div>
-        <div className=" flex flex-row flex-wrap  justify-between">
-          {Object.entries(aboutType).map(([slug, { header, img, body }]) => (
-            <div className=" mb-2 w-[100%] md:w-[50%] lg:w-[32%] bgClear">
-              <h1 className="bg-blue text-green text-center body-text-sizing">
-                <strong>
-                  <em>{header}</em>
-                </strong>
-              </h1>
-              <img className="w-[100%] object-cover " src={img} alt={slug} />
-              <p className="p-5 body-text-sizing whitespace-pre-wrap text-center ">
-                {body}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
-function About2() {
-  const whatHeader = "What is Equine Facilitated Learning?";
+  const [aboutTypes, setAboutTypes] = useState([]);
+  const { getAboutTypes } = useContentful();
+
+  useEffect(() => {
+    getAboutTypes().then((response) => response && setAboutTypes(response));
+  }, []);
+
   return (
     <motion.div
       className="pt-20 sm:pt-0 h-[100%] w-[100%]"
-      key={"about2"}
+      key={"about_Contentful"}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -273,24 +202,8 @@ function About2() {
           />
         </div>
         <div className=" flex flex-row flex-wrap  justify-between">
-          {Object.entries(aboutType).map(([slug, { header, img, body }]) => (
-            <div className=" mb-2 w-[100%] lg:w-[49%] 2xl:w-[32%] bgClear">
-              <h1 className="bg-blue text-green text-center body-text-sizing">
-                <strong>
-                  <em>{header}</em>
-                </strong>
-              </h1>
-              <div className="group hover:">
-                <img
-                  className="w-[100%] object-cover group-hover:blur-lg group-hover:opacity-40  duration-300 "
-                  src={img}
-                  alt={slug}
-                />
-                <p className="middle font-bold p-5 body-text-sizing whitespace-pre-wrap text-center w-fit group-hover:opacity-100">
-                  {body}
-                </p>
-              </div>
-            </div>
+          {aboutTypes.map((aboutType, index) => (
+            <AboutCard key={index} aboutType={aboutType} />
           ))}
         </div>
       </div>
@@ -298,43 +211,18 @@ function About2() {
   );
 }
 
-function MeetTheHerd() {
-  return (
-    <motion.div
-      className="h-[100%] w-[100%]"
-      key={"herd"}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <div className="fixed h-[100%] w-[100%] svg-bg"></div>
+function MeetTheHerdContentful() {
+  const [herdMembers, setHerdMembers] = useState([]);
+  const { getHerdMembers } = useContentful();
 
-      <div className="content flex  flex-col p-2 lg:pl-6 ">
-        <div className="flex flex-row flex-wrap lg:flex-nowrap  justify-between ">
-          {Object.entries(herd).map(([slug, { name, img, bio }]) => (
-            <div className="h-auto m-2 w-[99%] md:w-[46%] lg:w-[30%] min-w-[31%] bgClear text-webkit-center">
-              <img className="w-[100%]  object-cover " src={img} alt={slug} />
-              <h1 className="bg-blue text-green text-center body-text-sizing">
-                <strong>
-                  <em>{name}</em>
-                </strong>
-              </h1>
-              <p className="p-5 body-text-sizing whitespace-pre-wrap text-center ">
-                {bio}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+  useEffect(() => {
+    getHerdMembers().then((response) => response && setHerdMembers(response));
+  }, []);
 
-function MeetTheHerd2() {
   return (
     <motion.div
       className="pt-20 sm:pt-0 h-[100%] w-[100%]"
-      key={"herd2"}
+      key={"herd_contentful"}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -343,24 +231,8 @@ function MeetTheHerd2() {
 
       <div className="content flex  flex-col p-2 lg:pl-6 xl:justify-center">
         <div className=" flex flex-row flex-wrap xl:flex-nowrap  justify-between ">
-          {Object.entries(herd).map(([slug, { name, img, bio }]) => (
-            <div className=" m-2 w-[99%]   min-w-[37%] bgClear text-webkit-center">
-              <div className="group hover:">
-                <img
-                  className="group-hover:blur-lg group-hover:opacity-40  duration-300 w-[100%]  object-cover h-[100%]"
-                  src={img}
-                  alt={slug}
-                />
-                <p className="middle p-5 body-text-sizing whitespace-pre-wrap text-center w-fit group-hover:opacity-100">
-                  {bio}
-                </p>
-              </div>
-              <h1 className="bg-blue text-green text-center body-text-sizing">
-                <strong>
-                  <em>{name}</em>
-                </strong>
-              </h1>
-            </div>
+          {herdMembers.map((herdMember, index) => (
+            <MemberCard key={index} herdMember={herdMember} />
           ))}
         </div>
       </div>
@@ -484,61 +356,61 @@ function Contact() {
   );
 }
 
-const herd = {
-  "star": {
-    name: "Star",
-    img: star,
-    bio: "Star is a 16hh bay Thoroughbred mare. Star has come from a racing background, but much prefers chasing chickens away from her food than the finishing line. To follow Star’s adventures, see the Equus & Awareness Instagram link.",
-  },
-  "bell": {
-    name: "Bell",
-    img: bell,
-    bio: "Bell is a 15.1hh dappled grey Stockhorse. Bell has seen it all in her long lifetime of over 35 years. She is a wise old soul now enjoying a quieter life, sharing her gulf of wisdom in Equine Facilitated Awareness sessions and workshops. She is a natural teacher, for humans and horses alike.",
-  },
-  "fern": {
-    name: "Fern",
-    img: fern,
-    bio: "Fern is an Australian Cattle Dog. She is full of fun and very cheeky. Fern has a naturalherding instinct and is still learning that horses are not cattle, and don’t need rounding up. She enjoys their presence from a distance and will occasionally come to private sessions. She is very friendly, and loves to be around human companions.",
-  },
-  "ash": {
-    name: "Ashley",
-    img: ash,
-    bio: "Ashley is a qualified Equine Facilitated Learning Practitioner. Ashley co-facilitates with horses, aiming to foster self-awareness and inspire people of all ages and backgrounds to connect with their strengths and potential that has always been there. To follow Ashley’s horsemanship journey, follow the Instagram link.",
-  },
-};
+// const herd = {
+//   "star": {
+//     name: "Star",
+//     img: star,
+//     bio: "Star is a 16hh bay Thoroughbred mare. Star has come from a racing background, but much prefers chasing chickens away from her food than the finishing line. To follow Star’s adventures, see the Equus & Awareness Instagram link.",
+//   },
+//   "bell": {
+//     name: "Bell",
+//     img: bell,
+//     bio: "Bell is a 15.1hh dappled grey Stockhorse. Bell has seen it all in her long lifetime of over 35 years. She is a wise old soul now enjoying a quieter life, sharing her gulf of wisdom in Equine Facilitated Awareness sessions and workshops. She is a natural teacher, for humans and horses alike.",
+//   },
+//   "fern": {
+//     name: "Fern",
+//     img: fern,
+//     bio: "Fern is an Australian Cattle Dog. She is full of fun and very cheeky. Fern has a naturalherding instinct and is still learning that horses are not cattle, and don’t need rounding up. She enjoys their presence from a distance and will occasionally come to private sessions. She is very friendly, and loves to be around human companions.",
+//   },
+//   "ash": {
+//     name: "Ashley",
+//     img: ash,
+//     bio: "Ashley is a qualified Equine Facilitated Learning Practitioner. Ashley co-facilitates with horses, aiming to foster self-awareness and inspire people of all ages and backgrounds to connect with their strengths and potential that has always been there. To follow Ashley’s horsemanship journey, follow the Instagram link.",
+//   },
+// };
 
-const aboutType = {
-  "about1": {
-    img: pic_individual,
-    header: "Individual Sessions",
-    body: "We offer private sessions, tailored to your individual needs. We work with clients to create bespoke programs available from child to adult. These sessions involve structured activities designed to facilitate personal goals and enhance well-being, connection and self-awareness.",
-  },
-  "about2": {
-    img: pic_group,
-    header: "Group Sessions",
-    body: "Working in groups can help to build trust, facilitate supportive connections, develop communication and inspire collaboration. In collaboration with a group coordinator, we design a tailor-made program to suit specific group needs. Group sessions are available as one day packages, or over a weekly basis for a pre-determined time frame. Please get in touch to discuss.",
-  },
-  "about3": {
-    img: pic_workshops,
-    header: "Workshops",
-    body: "Workshops give the advantage of a shared lens to facilitate personal growth and self- development central to a specific theme. Workshops run over a one or two-day period, with lunch provided at an extra cost. Workshops are based out of our facilities on the idyllic Fleurieu Peninsula of South Australia. If you are interested in hosting a workshop at your own facilities in South Australia or interstate, please get in touch via our Contact page.",
-  },
-  "about4": {
-    img: pic_retreat,
-    header: "Retreats",
-    body: "Working with and learning from horses can bring a dynamic and uplifting element to your retreat package. We have beautiful facilities near the popular coastal destination of Port Elliot in South Australia. Please get in touch for more information on our bespoke retreat workshops.",
-  },
-  "about5": {
-    img: pic_collab,
-    header: "Collaboration",
-    body: "Is there something you want to share with the world? Do you need a powerful platform?  We are open to collaborating with various modalities whose values and ethics align with the invitational approach of Equus & Awareness.  Book a free 30 minute discovery call to kickstart your idea via the Contact page.",
-  },
-  "about6": {
-    img: pic_riders,
-    header: "For Riders & Horse Owners",
-    body: "If you have your own horse, we offer private sessions at your own home or agistment. These sessions are a great opportunity to strengthen the connection with your horse, and meet each other with a fresh perspective.  These sessions are designed as personal development sessions, but as a result can help to understand horsemanship difficulties.",
-  },
-};
+// const aboutType = {
+//   "about1": {
+//     img: pic_individual,
+//     header: "Individual Sessions",
+//     body: "We offer private sessions, tailored to your individual needs. We work with clients to create bespoke programs available from child to adult. These sessions involve structured activities designed to facilitate personal goals and enhance well-being, connection and self-awareness.",
+//   },
+//   "about2": {
+//     img: pic_group,
+//     header: "Group Sessions",
+//     body: "Working in groups can help to build trust, facilitate supportive connections, develop communication and inspire collaboration. In collaboration with a group coordinator, we design a tailor-made program to suit specific group needs. Group sessions are available as one day packages, or over a weekly basis for a pre-determined time frame. Please get in touch to discuss.",
+//   },
+//   "about3": {
+//     img: pic_workshops,
+//     header: "Public Workshops",
+//     body: "Workshops give the advantage of a shared lens to facilitate personal growth and self- development central to a specific theme. Workshops run over a one or two-day period, with lunch provided at an extra cost. Workshops are based out of our facilities on the idyllic Fleurieu Peninsula of South Australia. If you are interested in hosting a workshop at your own facilities in South Australia or interstate, please get in touch via our Contact page.",
+//   },
+//   "about4": {
+//     img: pic_retreat,
+//     header: "Retreats",
+//     body: "Working with and learning from horses can bring a dynamic and uplifting element to your retreat package. We have beautiful facilities near the popular coastal destination of Port Elliot in South Australia. Please get in touch for more information on our bespoke retreat workshops.",
+//   },
+//   "about5": {
+//     img: pic_collab,
+//     header: "Collaboration",
+//     body: "Is there something you want to share with the world? Do you need a powerful platform?  We are open to collaborating with various modalities whose values and ethics align with the invitational approach of Equus & Awareness.  Book a free 30 minute discovery call to kickstart your idea via the Contact page.",
+//   },
+//   "about6": {
+//     img: pic_riders,
+//     header: "For Riders & Horse Owners",
+//     body: "If you have your own horse, we offer private sessions at your own home or agistment. These sessions are a great opportunity to strengthen the connection with your horse, and meet each other with a fresh perspective.  These sessions are designed as personal development sessions, but as a result can help to understand horsemanship difficulties.",
+//   },
+// };
 
 const faqs = [
   {
