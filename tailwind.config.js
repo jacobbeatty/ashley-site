@@ -41,6 +41,7 @@ module.exports = {
         blue: "#9EC0E7",
         bgPink: "rgb(185,147,130,75%)",
         clear: "#FFFFFF",
+        home_clear: "rgb(255 234 211 / 84%)",
       },
     },
   },
