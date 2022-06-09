@@ -1,15 +1,18 @@
 import "./App.css";
-// import "./components/Nav";
+import emailjs from "@emailjs/browser";
+import ReCAPTCHA from "react-google-recaptcha";
+
 import { ReactComponent as Logo } from "./images/LOGO.svg";
 
 import pic_whatis from "./images/AboutPics/WhatIs.png";
 
 import useContentful from "./useContentful";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MemberCard from "./components/MemberCard";
 import AboutCard from "./components/AboutCard";
-
+import FaqItem from "./components/FaqItem";
+import TestimonialItem from "./components/TestimonialItem";
 import * as Yup from "yup";
 
 import { Routes, Route, NavLink, useLocation } from "react-router-dom";
@@ -129,7 +132,7 @@ function MobileNav() {
 function Home() {
   return (
     <motion.div
-      className="pt-20 sm:pt-0 content flex-col p-10 img-bg bg-cover justify-center"
+      className="pt-20 sm:pt-0 content flex-col p-10 img-bg bg-cover justify-between"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -244,22 +247,15 @@ function MeetTheHerdContentful() {
 }
 
 function Contact() {
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-    validationSchema: Yup.object({
-      name: Yup.string().max(30, "Must be 30 characters or less").required(),
-      email: Yup.string().email().required(),
-      message: Yup.string().min(4, "Please include your message :)").required(),
-    }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  const [faqs, setFaqs] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
+  const { getFaqs } = useContentful();
+  const { getTestimonials } = useContentful();
 
+  useEffect(() => {
+    getFaqs().then((response) => response && setFaqs(response));
+    getTestimonials().then((response) => response && setTestimonials(response));
+  }, []);
   return (
     <motion.div
       className=" h-[100%] w-[100%]"
@@ -272,84 +268,42 @@ function Contact() {
 
       <div className="content flex flex-col sm:flex-row pt-28 sm:pt-0  p-2 lg:p-10  justify-between">
         {/* Left pane */}
-        <div className="flex-col h-fit sm:h-[100%] w-[100%] sm:w-[49%] flex justify-between body-text-sizing">
+        <div className="flex-col h-fit  w-[100%] sm:w-[49%] flex justify-between body-text-sizing">
           <div className="mb-10 flex flex-col h-fit sm:h-[38%] w-[100%] items-center bgClear ">
-            <h1 className=" text-4xl font-bold italic bg-blue text-center  w-fit mt-[-2vh] pl-2 pr-2">
-              Contact
+            <h1 className="bg-blue text-green text-center body-text-sizing italic w-full ">
+              <strong>Contact</strong>
             </h1>
-            <form
-              className="flex flex-col w-full p-5 items-center"
-              onSubmit={formik.handleSubmit}
-              action=""
-            >
-              <input
-                className={`${
-                  formik.errors.name ? "border-red-500" : ""
-                } form-input`}
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Enter Name"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {formik.touched.name && formik.errors.name ? <></> : null}
-              <input
-                className="form-input"
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {formik.touched.name && formik.errors.email ? <></> : null}
-
-              <textarea
-                className="form-input h-[15vh] resize-none"
-                id="message"
-                name="message"
-                type="message"
-                placeholder="Enter message"
-                value={formik.values.message}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {formik.touched.message && formik.errors.message ? <></> : null}
-
-              <button className="bg-blue p-2 w-fit ml-auto" type="submit">
-                Send →
-              </button>
-            </form>
+            <div className="p-6 text-center">
+              <p className="">Please reach out to us at:</p>
+              <a
+                className="font-bold"
+                href="mailto:contact@equusandawareness.com"
+              >
+                contact@equusandawareness.com
+              </a>
+            </div>
           </div>
-          <div className="mb-10 flex flex-col h-fit sm:h-[58%] w-[100%] items-center bgClear">
-            <h1 className=" text-4xl font-bold italic bg-blue text-center  w-fit mt-[-2vh] pl-2 pr-2">
-              Workshops
+          <div className=" flex flex-col h-fit  w-[100%] items-center bgClear">
+            <h1 className=" bg-blue text-green text-center body-text-sizing italic w-full">
+              <strong>Testimonials</strong>
             </h1>
-            {events.map((event) => (
-              <>
-                <li className="list-none">{event.name}</li>
-                <li className="list-none">{event.description}</li>
-              </>
-            ))}
+            <div className="p-6">
+              {testimonials.map((testimonial, index) => (
+                <TestimonialItem key={index} testimonial={testimonial} />
+              ))}
+            </div>
           </div>
         </div>
         {/* Right pane */}
-        <div className="mb-10 h-fit sm:h-[100%] w-[100%] sm:w-[49%] body-text-sizing">
-          <div className="h-auto min-h-[100%] w-[100%] bgClear p-6 list-none flex flex-col align-middle items-center">
-            <h1 className=" text-4xl font-bold italic bg-blue text-center w-fit mt-[-3vh] pl-2 pr-2">
-              FAQ
+        <div className=" h-fit sm:h-[100%] w-[100%] sm:w-[49%] body-text-sizing">
+          <div className="h-auto  w-[100%] bgClear  list-none flex flex-col align-middle items-center">
+            <h1 className=" bg-blue text-green text-center body-text-sizing italic w-full">
+              <strong>FAQ</strong>
             </h1>
 
-            <div>
-              {faqs.map((faq) => (
-                <>
-                  <li className=" font-bold">{faq.question}</li>
-                  <li>{faq.answer}</li>
-                  <br></br>
-                </>
+            <div className="p-6">
+              {faqs.map((faq, index) => (
+                <FaqItem key={index} faq={faq} />
               ))}
             </div>
           </div>

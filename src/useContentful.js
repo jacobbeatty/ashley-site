@@ -50,9 +50,48 @@ const useContentful = () => {
       console.log(`Error: ${error}`);
     }
   };
-  return { getAboutTypes, getHerdMembers };
 
-  //   return { getHerdMembers };
+  const getFaqs = async () => {
+    try {
+      const entries = await client.getEntries({
+        content_type: "faq",
+        select: "fields",
+        "order": "sys.createdAt",
+      });
+
+      const sanitizedEntries = entries.items.map((item) => {
+        return {
+          ...item.fields,
+        };
+      });
+
+      return sanitizedEntries;
+    } catch (error) {
+      console.log(`Error: ${error}`);
+    }
+  };
+
+  const getTestimonials = async () => {
+    try {
+      const entries = await client.getEntries({
+        content_type: "testimonial",
+        select: "fields",
+        "order": "sys.createdAt",
+      });
+
+      const sanitizedEntries = entries.items.map((item) => {
+        return {
+          ...item.fields,
+        };
+      });
+
+      return sanitizedEntries;
+    } catch (error) {
+      console.log(`Error: ${error}`);
+    }
+  };
+
+  return { getAboutTypes, getHerdMembers, getFaqs, getTestimonials };
 };
 
 export default useContentful;
