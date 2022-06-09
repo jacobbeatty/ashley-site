@@ -268,8 +268,8 @@ function Contact() {
 
       <div className="content flex flex-col sm:flex-row pt-28 sm:pt-0  p-2 lg:p-10  justify-between">
         {/* Left pane */}
-        <div className="flex-col h-fit  w-[100%] sm:w-[49%] flex justify-between body-text-sizing">
-          <div className="mb-10 flex flex-col h-fit sm:h-[38%] w-[100%] items-center bgClear ">
+        <div className="flex-col h-fit sm:h-[100%] w-[100%] sm:w-[49%] body-text-sizing">
+          <div className="mb-10 flex flex-col h-fit  w-[100%] items-center bgClear ">
             <h1 className="bg-blue text-green text-center body-text-sizing italic w-full ">
               <strong>Contact</strong>
             </h1>
