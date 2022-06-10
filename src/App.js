@@ -139,7 +139,7 @@ function Home() {
     >
       <Logo className=" justify-center flex mt-[5vh] w-full lg:w-[40%]  " />
       {/* <LogoText className=" absolute right-10 top-10" /> */}
-      <h1 className=" text-center italic text-2xl xl:text-4xl bg-homeClear p-[1vh]">
+      <h1 className=" text-center italic text-2xl xl:text-4xl text-homeClear p-[1vh]">
         An invitation to awareness, through the language of the horse.
       </h1>
     </motion.div>
