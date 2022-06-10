@@ -1,6 +1,8 @@
 import "./App.css";
-import emailjs from "@emailjs/browser";
-import ReCAPTCHA from "react-google-recaptcha";
+// import emailjs from "@emailjs/browser";
+// import ReCAPTCHA from "react-google-recaptcha";
+// import * as Yup from "yup";
+// import { useFormik } from "formik";
 
 import { ReactComponent as Logo } from "./images/LOGO.svg";
 
@@ -13,11 +15,9 @@ import MemberCard from "./components/MemberCard";
 import AboutCard from "./components/AboutCard";
 import FaqItem from "./components/FaqItem";
 import TestimonialItem from "./components/TestimonialItem";
-import * as Yup from "yup";
 
 import { Routes, Route, NavLink, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { useFormik } from "formik";
 
 export default function App() {
   const location = useLocation();
@@ -164,7 +164,7 @@ function AboutContentful() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="fixed h-[100%] w-[100%] svg-bg"></div>
+      {/* <div className="fixed h-[100%] w-[100%] svg-bg"></div> */}
       <div className="content flex  flex-col p-2 lg:p-10 ">
         <div className="flex flex-col md:flex-row md:pb-8">
           <div className="w-[100%] lg:w-[68%] bgClear p-5">
@@ -233,7 +233,7 @@ function MeetTheHerdContentful() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="fixed h-[100%] w-[100%] svg-bg"></div>
+      {/* <div className="fixed h-[100%] w-[100%] svg-bg"></div> */}
 
       <div className="content flex  flex-col p-2 lg:pl-6 xl:justify-center">
         <div className=" flex flex-row flex-wrap xl:flex-nowrap  justify-between ">
@@ -264,7 +264,7 @@ function Contact() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <div className="fixed h-[100%] w-[100%] svg-bg"></div>
+      {/* <div className="fixed h-[100%] w-[100%] svg-bg"></div> */}
 
       <div className="content flex flex-col sm:flex-row pt-28 sm:pt-0  p-2 lg:p-10  justify-between">
         {/* Left pane */}

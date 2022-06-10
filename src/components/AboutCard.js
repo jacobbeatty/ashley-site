@@ -8,10 +8,10 @@ const AboutCard = ({ aboutType }) => {
       </h1>
       <div className="group hover:">
         <img
-          className="w-[100%] object-cover group-hover:blur-lg group-hover:opacity-40  duration-300 "
+          className="w-[100%] object-cover   duration-300 "
           src={aboutType.typeImage.file.url}
         />
-        <p className="middle font-bold p-5 body-text-sizing whitespace-pre-wrap text-center w-fit group-hover:opacity-100">
+        <p className=" font-bold p-5 body-text-sizing whitespace-pre-wrap text-center w-fit group-hover:opacity-100">
           {aboutType.typeBody}
         </p>
       </div>
