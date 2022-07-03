@@ -15,6 +15,7 @@ import MemberCard from "./components/MemberCard";
 import AboutCard from "./components/AboutCard";
 import FaqItem from "./components/FaqItem";
 import TestimonialItem from "./components/TestimonialItem";
+import AboutTop from "./components/AboutTop";
 
 import { Routes, Route, NavLink, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -150,10 +151,14 @@ function AboutContentful() {
   const whatHeader = "What is Equine Facilitated Learning?";
 
   const [aboutTypes, setAboutTypes] = useState([]);
+  const [aboutTop, setAboutTop] = useState([]);
+
   const { getAboutTypes } = useContentful();
+  const { getAboutTop } = useContentful();
 
   useEffect(() => {
     getAboutTypes().then((response) => response && setAboutTypes(response));
+    getAboutTop().then((response) => response && setAboutTop(response));
   }, []);
 
   return (
@@ -166,47 +171,9 @@ function AboutContentful() {
     >
       {/* <div className="fixed h-[100%] w-[100%] svg-bg"></div> */}
       <div className="content flex  flex-col p-2 lg:p-10 ">
-        <div className="flex flex-col md:flex-row md:pb-8">
-          <div className="w-[100%] lg:w-[68%] bgClear p-5">
-            <h1 className="text-xl md:text-4xl ">
-              <strong>
-                <em>{whatHeader}</em>
-              </strong>
-            </h1>
-            <p className="body-text-sizing whitespace-pre-line">
-              Horses and humans have been in conversation for thousands of
-              years.
-              <br></br>
-              <br></br>
-              <strong>Equine Facilitated Learning</strong> is a space to
-              participate in this powerful conversation. Horses are sentient
-              beings that mirror back to us our thoughts and feelings, and to
-              share space with such a powerful animal can shift us in profound
-              ways.
-              <br></br>
-              <br></br>
-              Horses can help us gain clarity on what we are experiencing and
-              feeling in a <strong>non-judgemental</strong> way, and being
-              around{" "}
-              <strong>
-                horses can help us to trust and be honest with ourselves.
-              </strong>
-              <br></br>
-              <br></br>
-              When we take responsibility for ourselves, we open doors to living
-              life in a way that honors our powerful potential.
-              <br></br>
-              <br></br>
-              <strong>Equus & Awareness</strong> facilitates a safe and
-              supportive environment to learn about ourselves and others.
-            </p>
-          </div>
-          <img
-            className="hidden lg:block w-[55%] xl:w-[40%] object-cover object-top z-10"
-            src={pic_whatis}
-            alt="horse and lady"
-          />
-        </div>
+        {aboutTop.map((aboutTop, index) => (
+          <AboutTop key={index} aboutTop={aboutTop} />
+        ))}
         <div className=" flex flex-row flex-wrap  justify-between">
           {aboutTypes.map((aboutType, index) => (
             <AboutCard key={index} aboutType={aboutType} />

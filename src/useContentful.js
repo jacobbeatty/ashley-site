@@ -91,7 +91,35 @@ const useContentful = () => {
     }
   };
 
-  return { getAboutTypes, getHerdMembers, getFaqs, getTestimonials };
+  const getAboutTop = async () => {
+    try {
+      const entries = await client.getEntries({
+        content_type: "aboutTop",
+        select: "fields",
+        "order": "sys.createdAt",
+      });
+
+      const sanitizedEntries = entries.items.map((item) => {
+        const aboutTopImage = item.fields.aboutTopImage.fields;
+        return {
+          ...item.fields,
+          aboutTopImage,
+        };
+      });
+
+      return sanitizedEntries;
+    } catch (error) {
+      console.log(`Error: ${error}`);
+    }
+  };
+
+  return {
+    getAboutTypes,
+    getHerdMembers,
+    getFaqs,
+    getTestimonials,
+    getAboutTop,
+  };
 };
 
 export default useContentful;
