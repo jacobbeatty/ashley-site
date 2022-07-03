@@ -236,7 +236,7 @@ function MeetTheHerdContentful() {
       {/* <div className="fixed h-[100%] w-[100%] svg-bg"></div> */}
 
       <div className="content flex  flex-col p-2 lg:pl-6 xl:justify-center">
-        <div className=" flex flex-row flex-wrap xl:flex-nowrap  justify-between h-[100%]">
+        <div className=" flex flex-row flex-wrap xl:flex-nowrap  justify-between h-fit">
           {herdMembers.map((herdMember, index) => (
             <MemberCard key={index} herdMember={herdMember} />
           ))}
